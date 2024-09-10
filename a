@@ -1,1 +1,8 @@
 Hello all This side mayank
+pipeline{
+	agent any
+	stages{
+		stage("Stage-1"){
+			}
+	}
+}
