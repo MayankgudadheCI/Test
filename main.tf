@@ -11,7 +11,7 @@ resource "aws_instance" "machine" {
   ami             = "ami-0d1e92463a5acf79d"
   instance_type   = "t2.micro"
   key_name        = "deploy"
-  security_group_ids = "sg-0775b034d32553d56"
+  security_groups = "Linux"
   user_data = <<-EOF
     #!/bin/bash
     cd /mnt
