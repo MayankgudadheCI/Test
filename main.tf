@@ -6,6 +6,7 @@ provider "aws" {
   secret_key = var.secret_access_key
   region     = "ap-south-1"
 }
+
 resource "aws_instance" "machine" {
   ami             = "ami-0d1e92463a5acf79d"
   instance_type   = "t2.micro"
@@ -17,8 +18,6 @@ resource "aws_instance" "machine" {
     unzip apache-tomcat-9.0.94.zip
     chmod -R 777 apache-tomcat-9.0.94
 
-    AWS_ACCESS_KEY_ID=""
-    AWS_SECRET_ACCESS_KEY=""
     AWS_DEFAULT_REGION="ap-south-1"
     BUCKET_NAME="deploy-mayank-mumbai"
     OBJECT_KEY="LoginWebApp.war"
@@ -26,9 +25,9 @@ resource "aws_instance" "machine" {
 
     # Configure AWS CLI
     echo "Configuring AWS CLI"
-    aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    aws configure set default.region $AWS_DEFAULT_REGION
+    aws configure set aws_access_key_id "${var.access_key}"
+    aws configure set aws_secret_access_key "${var.secret_access_key}"
+    aws configure set default.region "$AWS_DEFAULT_REGION"
 
     if [ $? -ne 0 ]; then
         echo "AWS CLI configuration failed."
@@ -49,7 +48,6 @@ resource "aws_instance" "machine" {
     sudo yum install java-11-amazon-corretto.x86_64 -y
     cd /mnt/apache-tomcat-9.0.94/bin
     ./startup.sh
-    
   EOF
 
   tags = {
@@ -57,5 +55,11 @@ resource "aws_instance" "machine" {
   }
 }
 
+# Output the instance ID and public IP for convenience
+output "instance_id" {
+  value = aws_instance.machine.id
+}
 
-
+output "instance_public_ip" {
+  value = aws_instance.machine.public_ip
+}
