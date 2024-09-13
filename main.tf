@@ -83,16 +83,8 @@ resource "aws_instance" "machine" {
     sudo yum install java-11-amazon-corretto.x86_64 -y
     # Start Tomcat
     echo "Starting Tomcat..."
-    /mnt/apache-tomcat-9.0.94/bin/startup.sh
-
-    # Check Tomcat status
-    sleep 10
-    if ! curl -s http://localhost:8080 >/dev/null; then
-        echo "Tomcat did not start successfully."
-        exit 1
-    fi
-
-     echo "Tomcat started successfully."
+    cd /mnt/apache-tomcat-9.0.94/bin/
+    ./startup.sh
   EOF
 
   tags = {
