@@ -36,11 +36,6 @@ resource "aws_instance" "machine" {
   instance_type   = "t2.micro"
   key_name        = "deploy"
   vpc_security_group_ids = [aws_security_group.sec-8080.id]
-
-  tags = {
-    Name = "allow_tls"
-  }
-}
   user_data = <<-EOF
     #!/bin/bash
     cd /mnt
