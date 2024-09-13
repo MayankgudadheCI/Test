@@ -1,3 +1,10 @@
+terraform {
+  backend "s3" {
+    bucket         = "deploy-mayank-mumbai"   
+    key            = "terraform/state/terraform.tfstate"  
+    region         = "ap-south-1"            
+  }
+}
 variable "access_key" {}
 variable "secret_access_key" {}
 
