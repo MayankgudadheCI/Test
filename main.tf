@@ -6,33 +6,10 @@ provider "aws" {
   secret_key = var.secret_access_key
   region     = "ap-south-1"
 }
-resource "aws_security_group" "sec-8080" {
-  vpc_id = aws_vpc.main.id
-  tags = {
-    Name = "sec-8080"
-  }
-  
-  ingress {
-    description = "SSH_ALL"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_instance" "machine" {
   ami             = "ami-0d1e92463a5acf79d"
   instance_type   = "t2.micro"
   key_name        = "deploy"
-  vpc_security_group_ids = [aws_security_group.sec-8080.id]
   user_data = <<-EOF
     #!/bin/bash
     cd /mnt
