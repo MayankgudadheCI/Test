@@ -1,5 +1,8 @@
 variable "access_key" {}
 variable "secret_access_key" {}
+variable "existing_security_group_id" {
+  description = "sg-0775b034d32553d56"
+}
 
 provider "aws" {
   access_key = var.access_key
@@ -11,6 +14,7 @@ resource "aws_instance" "machine" {
   ami             = "ami-0d1e92463a5acf79d"
   instance_type   = "t2.micro"
   key_name        = "deploy"
+  security_group_ids = [var.existing_security_group_id]
   user_data = <<-EOF
     #!/bin/bash
     cd /mnt
