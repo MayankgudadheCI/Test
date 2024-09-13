@@ -1,8 +1,5 @@
 variable "access_key" {}
 variable "secret_access_key" {}
-variable "existing_security_group_name" {
-  description = "Linux"
-}
 
 provider "aws" {
   access_key = var.access_key
