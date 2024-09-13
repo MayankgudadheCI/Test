@@ -6,6 +6,9 @@ provider "aws" {
   secret_key = var.secret_access_key
   region     = "ap-south-1"
 }
+data "aws_vpc" "default" {
+  default = true
+}
 resource "aws_instance" "machine" {
   ami             = "ami-0d1e92463a5acf79d"
   instance_type   = "t2.micro"
