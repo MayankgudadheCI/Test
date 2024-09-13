@@ -35,16 +35,11 @@ resource "aws_instance" "machine" {
   ami             = "ami-0d1e92463a5acf79d"
   instance_type   = "t2.micro"
   key_name        = "deploy"
-  resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
-  description = "Allow TLS inbound traffic and all outbound traffic"
-  vpc_id      = aws_vpc.main.id
   vpc_security_group_ids = [aws_security_group.sec-8080.id]
 
   tags = {
     Name = "allow_tls"
   }
-}
 }
   user_data = <<-EOF
     #!/bin/bash
