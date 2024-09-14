@@ -83,8 +83,13 @@ resource "aws_instance" "machine" {
     echo "Starting Tomcat..."
     cd /mnt/apache-tomcat-9.0.94/bin/
     ./startup.sh
+    sleep 10
+    cd /mnt/apache-tomcat-9.0.94/bin/
+    ./shutdown.sh 
+    sleep 10
     cd /mnt/apache-tomcat-9.0.94/bin/
     ./startup.sh
+    sleep 10
 
   EOF
 
