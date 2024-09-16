@@ -1,11 +1,3 @@
-# main.tf
-
-provider "aws" {
-  access_key = var.access_key
-  secret_key = var.secret_access_key
-  region     = "ap-south-1"
-}
-
 resource "aws_security_group" "custom" {
   name        = "custom-security-group"
   description = "Custom security group in the default VPC"
@@ -40,9 +32,9 @@ resource "aws_security_group" "custom" {
 }
 
 resource "aws_instance" "machine" {
-  ami                    = "ami-0d1e92463a5acf79d"
-  instance_type          = "t2.micro"
-  key_name               = "deploy"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.custom.id]
   user_data = <<-EOF
     #!/bin/bash
@@ -90,7 +82,6 @@ resource "aws_instance" "machine" {
     cd /mnt/apache-tomcat-9.0.94/bin/
     ./startup.sh
     sleep 10
-
   EOF
 
   tags = {
