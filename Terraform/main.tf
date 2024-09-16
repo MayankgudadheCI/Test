@@ -7,6 +7,7 @@ provider "aws" {
   secret_key = var.secret_access_key
   region     = "ap-south-1"
 }
+
 resource "aws_security_group" "custom" {
   name        = "custom-security-group"
   description = "Custom security group in the default VPC"
@@ -39,10 +40,11 @@ resource "aws_security_group" "custom" {
     Name = "custom-security-group"
   }
 }
+
 resource "aws_instance" "machine" {
-  ami             = "ami-0d1e92463a5acf79d"
-  instance_type   = "t2.micro"
-  key_name        = "deploy"
+  ami                    = "ami-0d1e92463a5acf79d"
+  instance_type          = "t2.micro"
+  key_name               = "deploy"
   vpc_security_group_ids = [aws_security_group.custom.id]
   user_data = <<-EOF
     #!/bin/bash
@@ -96,13 +98,4 @@ resource "aws_instance" "machine" {
   tags = {
     Name = "Instance-A"
   }
-}
-
-# Output the instance ID and public IP for convenience
-output "instance_id" {
-  value = aws_instance.machine.id
-}
-
-output "instance_public_ip" {
-  value = aws_instance.machine.public_ip
 }
