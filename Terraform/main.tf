@@ -1,6 +1,4 @@
-
-variable "access_key" {}
-variable "secret_access_key" {}
+# main.tf
 
 provider "aws" {
   access_key = var.access_key
