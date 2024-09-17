@@ -1,3 +1,4 @@
+
 variable "ami" {
   description = "AMI ID for the EC2 instance"
   type        = string
@@ -13,12 +14,14 @@ variable "key_name" {
   type        = string
 }
 
-variable "bucket_name" {
-  description = "Name of the S3 bucket"
+variable "access_key" {
+  description = "AWS access key ID"
   type        = string
 }
 
-variable "object_key" {
-  description = "Key of the object in S3"
+variable "secret_access_key" {
+  description = "AWS secret access key"
   type        = string
 }
+
+

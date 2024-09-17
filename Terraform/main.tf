@@ -11,7 +11,6 @@ module "ec2-instance" {
   key_name           = var.key_name
   access_key         = var.access_key
   secret_access_key =  var.secret_access_key
-  object_key        = "LoginWebApp.war"
 }
 
 output "instance_id" {
