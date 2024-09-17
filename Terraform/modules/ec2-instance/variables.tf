@@ -24,4 +24,13 @@ variable "secret_access_key" {
   type        = string
 }
 
-
+variable "bucket_name" {
+  description = "S3 bucket name"
+  type        = string
+  default     = "deploy-mayank-mumbai"
+}
+variable "region" {
+  description = "The AWS region to deploy the resources"
+  type        = string
+  default     = "ap-south-1"
+}
