@@ -1,9 +1,8 @@
 #!/bin/bash
 sudo yum install java-11-amazon-corretto.x86_64 -y
-cd /mnt
-wget "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.94/bin/apache-tomcat-9.0.94.zip"
-unzip apache-tomcat-9.0.94.zip
-chmod -R 777 apache-tomcat-9.0.94
+wget "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.94/bin/apache-tomcat-9.0.94.zip" /mnt
+unzip /mnt/apache-tomcat-9.0.94.zip
+chmod -R 777 /mnt/apache-tomcat-9.0.94
 
 AWS_DEFAULT_REGION="${aws_region}"
 BUCKET_NAME="${bucket_name}"
