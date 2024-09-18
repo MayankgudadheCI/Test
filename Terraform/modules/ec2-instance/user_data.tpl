@@ -4,16 +4,21 @@ wget "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.94/bin/apache-tomcat-9.0.94.
 unzip apache-tomcat-9.0.94.zip
 chmod -R 777 apache-tomcat-9.0.94
 
-AWS_DEFAULT_REGION="${aws_region}"
-BUCKET_NAME="${bucket_name}"
-OBJECT_KEY="${object_key}"
+AWS_DEFAULT_REGION="ap-south-1"
+BUCKET_NAME="deploy-mayank-mumbai"
+OBJECT_KEY="LoginWebApp.war"
 DESTINATION_PATH="/mnt/apache-tomcat-9.0.94/webapps"
 
-# Configure AWS CLI
+    # Configure AWS CLI
 echo "Configuring AWS CLI"
-aws configure set aws_access_key_id "${access_key}"
-aws configure set aws_secret_access_key "${secret_access_key}"
+aws configure set aws_access_key_id "${var.access_key}"
+aws configure set aws_secret_access_key "${var.secret_access_key}"
 aws configure set default.region "$AWS_DEFAULT_REGION"
+
+if [ $? -ne 0 ]; then
+    echo "AWS CLI configuration failed."
+    exit 1
+fi
 
 echo "Downloading object from S3..."
 aws s3 cp s3://$BUCKET_NAME/$OBJECT_KEY $DESTINATION_PATH
