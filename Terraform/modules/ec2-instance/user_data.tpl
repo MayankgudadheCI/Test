@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo yum install java-11-amazon-corretto.x86_64 -y
 cd /mnt
 wget "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.94/bin/apache-tomcat-9.0.94.zip"
 unzip apache-tomcat-9.0.94.zip
@@ -16,7 +17,7 @@ aws configure set aws_secret_access_key "${secret_access_key}"
 aws configure set default.region "$AWS_DEFAULT_REGION"
 
 echo "Downloading object from S3..."
-aws s3 cp s3://$BUCKET_NAME/$OBJECT_KEY $DESTINATION_PATH
+aws s3 cp s3://deploy-mayank-mumbai/LoginWebApp.war /mnt/apache-tomcat-9.0.94/webapps
 
 # Check if the download was successful
 if [ $? -eq 0 ]; then
@@ -25,8 +26,6 @@ else
     echo "Download failed."
     exit 1
 fi
-
-sudo yum install java-11-amazon-corretto.x86_64 -y
 # Start Tomcat
 echo "Starting Tomcat..."
 cd /mnt/apache-tomcat-9.0.94/bin/
