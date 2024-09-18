@@ -22,7 +22,7 @@ aws configure set default.region "$AWS_DEFAULT_REGION"
 
 # Download object from S3
 echo "Downloading object from S3..."
-aws s3 cp "s3://deploy-mayank-mumbai/" "${DESTINATION_PATH}"
+aws s3 cp "s3://deploy-mayank-mumbai/ /mnt/apache-tomcat-9.0.95/webapps
 
 # Check if the download was successful
 if [ $? -eq 0 ]; then
