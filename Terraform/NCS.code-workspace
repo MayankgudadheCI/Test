@@ -1,12 +1,15 @@
 {
     "folders": [
         {
+            "name": "infra",
             "path": "../.."
         },
         {
+            "name": "public_mayank",
             "path": "../../../public_mayank"
         },
         {
+            "name": "ruby",
             "path": "../../../../ruby"
         }
     ]
