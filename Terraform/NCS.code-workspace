@@ -11,6 +11,12 @@
         {
             "name": "ruby",
             "path": "../../../../ruby"
+        },
+        {
+            "path": "../../../my-terraform-project"
+        },
+        {
+            "path": "../../../../test"
         }
     ]
 }

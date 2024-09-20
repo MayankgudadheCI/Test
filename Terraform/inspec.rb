@@ -53,9 +53,9 @@ control 'aws-ec2-instance-1.0' do
   
   describe aws_ec2_instance(instance_id) do
     it { should exist }
-    its('instance_type') { should eq 't2.micro' } # Replace with your instance type
-    its('image_id') { should eq 'ami-0d1e92463a5acf79d' } # Replace with your AMI ID
-    its('key_name') { should eq 'deploy' } # Replace with your key name
+    its('instance_type') { should eq 't2.micro' } 
+    its('image_id') { should eq 'ami-0d1e92463a5acf79d' } 
+    its('key_name') { should eq 'deploy' } 
     its('security_group_ids') { should include 'custom-security-group' }
   end
 end
